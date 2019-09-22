@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="内容安全策略(Content Security Policy)简称CSP是由W3C小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.">
+<meta name="keywords" content="HTTP,安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB应用内容安全策略(Content Security Policy)">
+<meta property="og:url" content="https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/index.html">
+<meta property="og:site_name" content="王宜明的博客空间">
+<meta property="og:description" content="内容安全策略(Content Security Policy)简称CSP是由W3C小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/20/16906958eb002cb6?w=2354&h=1046&f=png&s=261871">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/20/1690695d7064cd04?w=2352&h=1166&f=png&s=303992">
+<meta property="og:updated_time" content="2019-09-21T01:10:10.283Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WEB应用内容安全策略(Content Security Policy)">
+<meta name="twitter:description" content="内容安全策略(Content Security Policy)简称CSP是由W3C小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/2/20/16906958eb002cb6?w=2354&h=1046&f=png&s=261871">
+  <link rel="canonical" href="https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>WEB应用内容安全策略(Content Security Policy) | 王宜明的博客空间</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101694997-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-101694997-1');
+    }
+  </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e113c92ba87a601d4e51df3b273b65a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王宜明的博客空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/yuyangzi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王宜明">
+      <meta itemprop="description" content="王宜明的技术分享博客">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王宜明的博客空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">WEB应用内容安全策略(Content Security Policy)
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-20 23:24:12" itemprop="dateCreated datePublished" datetime="2019-02-20T23:24:12+08:00">2019-02-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-21 09:10:10" itemprop="dateModified" datetime="2019-09-21T09:10:10+08:00">2019-09-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/前端技术/" itemprop="url" rel="index"><span itemprop="name">前端技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/02/20/HTPP内容安全策略(Content Security Policy)/" class="post-meta-item leancloud_visitors" data-flag-title="WEB应用内容安全策略(Content Security Policy)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/02/20/HTPP内容安全策略(Content Security Policy)/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/02/20/HTPP内容安全策略(Content Security Policy)/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+            <div class="post-description">内容安全策略(Content Security Policy)简称CSP是由W3C小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="WEB应用内容安全策略-Content-Security-Policy"><a href="#WEB应用内容安全策略-Content-Security-Policy" class="headerlink" title="WEB应用内容安全策略(Content Security Policy)"></a>WEB应用内容安全策略(Content Security Policy)</h1><h2 id="内容安全策略-Content-Security-Policy-是什么"><a href="#内容安全策略-Content-Security-Policy-是什么" class="headerlink" title="内容安全策略(Content Security Policy)是什么?"></a>内容安全策略(Content Security Policy)是什么?</h2><p>&emsp;&emsp;<a href="https://www.w3.org/TR/CSP2/" target="_blank" rel="noopener">内容安全策略(Content Security Policy)</a>简称<code>CSP</code>是由<a href="https://www.w3.org/" target="_blank" rel="noopener">W3C</a>小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.</p>
+<p>&emsp;&emsp;目前内容安全策略(Content Security Policy)的规范一共有三个版本:</p>
+<ol>
+<li><a href="https://www.w3.org/TR/CSP1/" target="_blank" rel="noopener">Content Security Policy Level 1</a></li>
+<li><a href="https://www.w3.org/TR/CSP2/" target="_blank" rel="noopener">Content Security Policy Level 2</a></li>
+<li><a href="https://www.w3.org/TR/CSP3/" target="_blank" rel="noopener">Content Security Policy Level 3</a></li>
+</ol>
+<p>&emsp;&emsp;现在主要使用的是第二个版本,第三个版本目前还在草案当中</p>
+<h2 id="CSP的作用"><a href="#CSP的作用" class="headerlink" title="CSP的作用"></a>CSP的作用</h2><p>&emsp;&emsp;<code>CSP</code>被设计出来的目的就是为了<strong>效防范内容注入攻击</strong>,如XSS攻击等.</p>
+<p>&emsp;&emsp;它通过让开发者对自己WEB应用声明一个外部资源加载的白名单,使得客户端在运行WEB应用时对外部资源的加载做出筛选和识别,只加载被允许的网站资源.对于不被允许的网站资源不予加载和执行.同时,还可以将WEB应用中出现的不被允许的资源链接和详情报告给我们指定的网址.如此,大大增强了WEB应用的安全性.使得攻击者即使发现了漏洞,也没法注入脚本,除非还控制了一台列入了白名单的服务器.</p>
+<h2 id="使用CSP"><a href="#使用CSP" class="headerlink" title="使用CSP"></a>使用CSP</h2><h3 id="CSP的选择"><a href="#CSP的选择" class="headerlink" title="CSP的选择"></a>CSP的选择</h3><p>&emsp;&emsp;根据W3C的设计,<code>CSP</code>分为两种模式:</p>
+<ul>
+<li>一种是<code>Content-Security-Policy</code>.</li>
+</ul>
+<p>使用这种模式,将会直接阻止非法的外部资源加载,同时也可以选择是否配置将非法资源加载的链接和行为报告给我们指定的网址</p>
+<ul>
+<li>另一种是<code>Content-Security-Policy-Report-Only</code></li>
+</ul>
+<p>使用这种模式时,客户端在遇到非法的外部资源加载时并不会阻止,而是正常加载.但是会将次加载行为和链接报告给我我指定的网址.所以使用此模式时,必须要使用<code>report-uri</code>策略配置报告非法资源加载情况的网址.</p>
+<p>&emsp;&emsp;以上是<code>CSP</code>策略的两种模式,在实际使用中,我们可以根据自己的情况任意选择其中一种模式.</p>
+<h3 id="CSP的使用方式"><a href="#CSP的使用方式" class="headerlink" title="CSP的使用方式"></a>CSP的使用方式</h3><p>&emsp;&emsp;<code>CSP</code>的使用方式有两种:</p>
+<ul>
+<li>一种是前端开发时直接在HTML页面中使用<code>&lt;meta&gt;</code>标签,如下:</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"default-src 'self';"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- or --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-security-policy-report-only"</span> <span class="attr">content</span>=<span class="string">"default-src 'self';"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一种是后端开发或服务运维人员对页面的HTTP请求的响应配置<code>Content-Security-Policy</code>属性,如在NGINX服务器上配置如下</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span>  Content-Security-Policy  <span class="string">"default-src 'self'"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">add_header</span>  Content-Security-Policy-Report-Only  <span class="string">"default-src 'self'"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过以上两种方式的任意一种即可启用<code>CSP</code>.</p>
+<h3 id="CSP的配置"><a href="#CSP的配置" class="headerlink" title="CSP的配置"></a>CSP的配置</h3><blockquote>
+<p>&emsp;&emsp;一个策略由一系列策略指令所组成，每个策略指令都描述了一个针对某个特定类型资源以及生效范围的策略。你的策略应当包含一个<code>default-src</code>策略指令，在其他资源类型没有符合自己的策略时应用该策略(有关完整列表查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid/default-src" target="_blank" rel="noopener">default-src</a>)。一个策略可以包含<code>default-src</code>或者<code>script-src</code>指令来防止内联脚本运行, 并杜绝<code>eval()</code>的使用。 一个策略也可包含一个<code>default-src</code>或 <code>style-src</code>指令去限制来自一个<code>&lt;style&gt;</code>元素或者style属性的內联样式。</p>
+</blockquote>
+<p>&emsp;&emsp;<strong>示例: 常见用例,来自<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP" target="_blank" rel="noopener">MDN</a>:</strong></p>
+<ol>
+<li>一个网站管理者想要所有内容均来自站点的同一个源 (不包括其子域名)</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src 'self'</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>一个网站管理者允许内容来自信任的域名及其子域名 (域名不必须与CSP设置所在的域名相同)</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src 'self' *.trusted.com</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>一个网站管理者允许网页应用的用户在他们自己的内容中包含来自任何源的图片, 但是限制音频或视频需从信任的资源提供者(获得)，所有脚本必须从特定主机服务器获取可信的代码.</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src 'self'; img-src *; media-src media1.com media2.com; script-src userscripts.example.com</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这里，各种内容默认仅允许从文档所在的源获取, 但存在如下例外:</p>
+<blockquote>
+<ul>
+<li>图片可以从任何地方加载(注意 “*” 通配符)。</li>
+<li>多媒体文件仅允许从 media1.com 和 media2.com 加载(不允许从这些站点的子域名)。</li>
+<li>可运行脚本仅允许来自于 userscripts.example.com。</li>
+</ul>
+</blockquote>
+<ol start="4">
+<li>一个线上银行网站的管理者想要确保网站的所有内容都要通过SSL方式获取，以避免攻击者窃听用户发出的请求。</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src https://onlinebanking.jumbobank.com</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;该服务器仅允许通过HTTPS方式并仅从onlinebanking.jumbobank.com域名来访问文档。</p>
+<ol start="5">
+<li>一个在线邮箱的管理者想要允许在邮件里包含HTML，同样图片允许从任何地方加载，但不允许JavaScript或者其他潜在的危险内容(从任意位置加载)。</li>
+</ol>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src 'self' *.mailsite.com; img-src *</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;注意这个示例并未指定<code>script-src</code>。在此CSP示例中，站点通过<code>default-src</code>指令的对其进行配置，这也同样意味着脚本文件仅允许从原始服务器获取</p>
+<ol start="6">
+<li>违例报告样本</li>
+</ol>
+<p>&emsp;&emsp;默认情况下，违规报告并不会发送。为启用发送违规报告，你需要指定<code>report-uri</code>策略指令，并提供至少一个URI地址去递交报告。这个地址可以是相对于当前网站的相对地址，也可以是一个绝对地址：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>: default-src 'none'; style-src cdn.example.com; report-uri /_/csp-reports</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;报告格式如下:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"csp-report"</span>: &#123;</span><br><span class="line">    <span class="attr">"document-uri"</span>: <span class="string">"http://example.com/signup.html"</span>,</span><br><span class="line">    <span class="attr">"referrer"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="attr">"blocked-uri"</span>: <span class="string">"http://example.com/css/style.css"</span>,</span><br><span class="line">    <span class="attr">"violated-directive"</span>: <span class="string">"style-src cdn.example.com"</span>,</span><br><span class="line">    <span class="attr">"original-policy"</span>: <span class="string">"default-src 'none'; style-src cdn.example.com; report-uri /_/csp-reports"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;违例报告的语法:</p>
+<blockquote>
+<p>作为报告的JSON对象报告包含了以下数据：</p>
+<ul>
+<li><code>document-uri</code>: 发生违规的文档的URI。</li>
+<li><code>referrer</code>: 违规发生处的文档引用（地址）。</li>
+<li><code>blocked-uri</code>: 被CSP阻止的资源URI。如果被阻止的URI来自不同的源而非文档URI，那么被阻止的资源URI会被删减，仅保留协议，主机和端口号。</li>
+<li><code>violated-directive</code>: 违反的策略名称。</li>
+<li><code>original-policy</code>: 在 Content-Security-Policy HTTP 头部中指明的原始策略。</li>
+</ul>
+</blockquote>
+<h3 id="CSP的策略指令"><a href="#CSP的策略指令" class="headerlink" title="CSP的策略指令"></a>CSP的策略指令</h3><ul>
+<li>常见策略类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>策略指令</th>
+<th>策略说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>default-src</td>
+<td>默认加载策略</td>
+</tr>
+<tr>
+<td>script-src</td>
+<td>外部脚本</td>
+</tr>
+<tr>
+<td>style-src</td>
+<td>样式表</td>
+</tr>
+<tr>
+<td>img-src</td>
+<td>图像</td>
+</tr>
+<tr>
+<td>media-src</td>
+<td>媒体文件（音频和视频）</td>
+</tr>
+<tr>
+<td>font-src</td>
+<td>字体文件</td>
+</tr>
+<tr>
+<td>object-src</td>
+<td>插件（比如 Flash）</td>
+</tr>
+<tr>
+<td>child-src</td>
+<td>框架</td>
+</tr>
+<tr>
+<td>frame-ancestors</td>
+<td>嵌入的外部资源（比如<code>&lt;iframe&gt;</code>、<code>&lt;iframe&gt;</code>、<code>&lt;embed&gt;</code>和<code>&lt;applet&gt;</code>）</td>
+</tr>
+<tr>
+<td>connect-src</td>
+<td>HTTP 连接（通过 XHR、WebSockets、EventSource等）</td>
+</tr>
+<tr>
+<td>worker-src</td>
+<td>worker脚本</td>
+</tr>
+<tr>
+<td>manifest-src</td>
+<td>manifest 文件</td>
+</tr>
+</tbody></table>
+<p><strong>想要了解策略的全部类型可以查看<a href="https://www.w3.org/TR/CSP2/#directives" target="_blank" rel="noopener">这里</a></strong></p>
+<ul>
+<li>策略值类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令值</th>
+<th>指令值说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>允许任何内容</td>
+</tr>
+<tr>
+<td>‘none’</td>
+<td>不允许任何内容</td>
+</tr>
+<tr>
+<td>‘self’</td>
+<td>允许来自相同来源的内容（相同的协议、域名和端口）</td>
+</tr>
+<tr>
+<td>data:</td>
+<td>允许 data: 协议（如 base64 编码的图片）</td>
+</tr>
+<tr>
+<td><a href="http://www.Google.com" target="_blank" rel="noopener">www.Google.com</a></td>
+<td>允许加载指定域名的资源</td>
+</tr>
+<tr>
+<td>*.Google.com</td>
+<td>允许加载 Google.com 任何子域的资源</td>
+</tr>
+<tr>
+<td>‘unsafe-inline’</td>
+<td>允许使用内联资源,如内联的 <code>&lt;script&gt;</code> 元素、javascript: URL、内联的事件处理函数和内联的 <code>&lt;style&gt;</code> 元素.两侧单引号是必须的.</td>
+</tr>
+<tr>
+<td>‘unsafe-eval’</td>
+<td>允许使用<code>eval()</code>等通过字符串创建代码的方法。两侧单引号是必须的。</td>
+</tr>
+</tbody></table>
+<h2 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h2><h3 id="Content-Security-Policy-Level-1"><a href="#Content-Security-Policy-Level-1" class="headerlink" title="Content Security Policy Level 1"></a>Content Security Policy Level 1</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/20/16906958eb002cb6?w=2354&h=1046&f=png&s=261871" alt="CSP1"></p>
+<h3 id="Content-Security-Policy-Level-2"><a href="#Content-Security-Policy-Level-2" class="headerlink" title="Content Security Policy Level 2"></a>Content Security Policy Level 2</h3><p><img src="https://user-gold-cdn.xitu.io/2019/2/20/1690695d7064cd04?w=2352&h=1166&f=png&s=303992" alt="CSP2"></p>
+<p>上面是我的一些粗浅的总结,希望对大家有所帮助.如果文中有何不当之处请予以斧正,谢谢.</p>
+<p><strong>参考资料:</strong></p>
+<ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP" target="_blank" rel="noopener">MDN—CSP</a></p>
+</li>
+<li><p><a href="https://www.w3.org/TR/CSP2/" target="_blank" rel="noopener">W3C—Content Security Policy Level 2</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="noopener">阮一峰—Content Security Policy 入门教程</a></p>
+</li>
+</ul>
+<p><strong>我的个人网址:</strong> <a href="https://wangyiming.info/">https://wangyiming.info/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>王宜明</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/" title="WEB应用内容安全策略(Content Security Policy)">https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+            
+              <a href="/tags/安全/" rel="tag"># 安全</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/05/26/新一代的前端存储方案--indexedDB/" rel="next" title="新一代的前端存储方案--indexedDB">
+                  <i class="fa fa-chevron-left"></i> 新一代的前端存储方案--indexedDB
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB应用内容安全策略-Content-Security-Policy"><span class="nav-number">1.</span> <span class="nav-text">WEB应用内容安全策略(Content Security Policy)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容安全策略-Content-Security-Policy-是什么"><span class="nav-number">1.1.</span> <span class="nav-text">内容安全策略(Content Security Policy)是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP的作用"><span class="nav-number">1.2.</span> <span class="nav-text">CSP的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CSP"><span class="nav-number">1.3.</span> <span class="nav-text">使用CSP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP的选择"><span class="nav-number">1.3.1.</span> <span class="nav-text">CSP的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP的使用方式"><span class="nav-number">1.3.2.</span> <span class="nav-text">CSP的使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP的配置"><span class="nav-number">1.3.3.</span> <span class="nav-text">CSP的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP的策略指令"><span class="nav-number">1.3.4.</span> <span class="nav-text">CSP的策略指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器兼容性"><span class="nav-number">1.4.</span> <span class="nav-text">浏览器兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Security-Policy-Level-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">Content Security Policy Level 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Security-Policy-Level-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">Content Security Policy Level 2</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpeg"
+      alt="王宜明">
+  <p class="site-author-name" itemprop="name">王宜明</p>
+  <div class="site-description" itemprop="description">王宜明的技术分享博客</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yuyangzi" title="GitHub &rarr; https://github.com/yuyangzi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:wangyiming19950222@gmail.com" title="E-Mail &rarr; mailto:wangyiming19950222@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" title="Weibo &rarr; http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://twitter.com/wangyiming0222" title="Twitter &rarr; https://twitter.com/wangyiming0222" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/wangyiming19950222" title="FB Page &rarr; https://www.facebook.com/wangyiming19950222" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://juejin.im/user/59116ed2a0bb9f0058aaa03b" title="掘金 &rarr; https://juejin.im/user/59116ed2a0bb9f0058aaa03b" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>掘金</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备17022214号 </a><span><img src="/images/beian.png" style="display:inline-block;"/>
+  
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=17022214" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王宜明</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'H1bnWpntrmfbwK0yz2mQqydz-gzGzoHsz',
+    appKey: 'WFKFWEpWF7uXd4eaKgyao6ic',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-CN' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

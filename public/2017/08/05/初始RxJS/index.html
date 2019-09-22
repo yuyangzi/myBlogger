@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Rx.JS是英文 Reactive Extensions for JavaScript 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.">
+<meta name="keywords" content="RxJS,观察者模式,迭代模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初始RxJS">
+<meta property="og:url" content="https://wangyiming.info/2017/08/05/初始RxJS/index.html">
+<meta property="og:site_name" content="王宜明的博客空间">
+<meta property="og:description" content="Rx.JS是英文 Reactive Extensions for JavaScript 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-21T01:07:15.363Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初始RxJS">
+<meta name="twitter:description" content="Rx.JS是英文 Reactive Extensions for JavaScript 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.">
+  <link rel="canonical" href="https://wangyiming.info/2017/08/05/初始RxJS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>初始RxJS | 王宜明的博客空间</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101694997-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-101694997-1');
+    }
+  </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e113c92ba87a601d4e51df3b273b65a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王宜明的博客空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/yuyangzi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://wangyiming.info/2017/08/05/初始RxJS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王宜明">
+      <meta itemprop="description" content="王宜明的技术分享博客">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王宜明的博客空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">初始RxJS
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-05 23:46:34" itemprop="dateCreated datePublished" datetime="2017-08-05T23:46:34+08:00">2017-08-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-21 09:07:15" itemprop="dateModified" datetime="2019-09-21T09:07:15+08:00">2019-09-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/前端技术/" itemprop="url" rel="index"><span itemprop="name">前端技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2017/08/05/初始RxJS/" class="post-meta-item leancloud_visitors" data-flag-title="初始RxJS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/08/05/初始RxJS/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/08/05/初始RxJS/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+            <div class="post-description">Rx.JS是英文 Reactive Extensions for JavaScript 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什么是Rx-JS"><a href="#什么是Rx-JS" class="headerlink" title="什么是Rx.JS"></a>什么是Rx.JS</h1><p>&emsp;&emsp;<code>Rx.JS</code>是英文 <strong>Reactive Extensions for JavaScript</strong> 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.<br>&emsp;&emsp;相对于JavaScript中其它的异步式解决方式(回调函数、Promise、Gender、async函数而言),Rx.JS有着更加强大的特性和更加优雅的写法.如(纯净性、流动性、值)。</p>
+<h2 id="Rx-JS的基本概念"><a href="#Rx-JS的基本概念" class="headerlink" title="Rx.JS的基本概念"></a>Rx.JS的基本概念</h2><p>&emsp;&emsp;Rx.JS的响应式编程操作是结合了观察者模式、迭代模式以及函数式编程来实现的.它主要有着如下几个概念:</p>
+<blockquote>
+<ul>
+<li>Observable (可观察对象): 表示一个概念，这个概念是一个可调用的未来值或事件的集合。</li>
+<li>Observer (观察者): 一个回调函数的集合，它知道如何去监听由 Observable 提供的值。</li>
+<li>Subscription (订阅): 表示 Observable 的执行，主要用于取消 Observable 的执行。</li>
+<li>Operators (操作符): 采用函数式编程风格的纯函数 (pure function)，使用像 map、filter、concat、flatMap 等这样的操作符来处理集合。</li>
+<li>Subject (主体): 相当于 EventEmitter，并且是将值或事件多路推送给多个 Observer 的唯一方式。</li>
+<li>Schedulers (调度器): 用来控制并发并且是中央集权的调度员，允许我们在发生计算时进行协调，例如 setTimeout 或 requestAnimationFrame 或其他。</li>
+</ul>
+</blockquote>
+<p>&emsp;&emsp;下面,来让我们看一个简单的示例.<br>&emsp;&emsp;我们都知道,在前端开发当中为性能的优化,我们往往会对某个持续不断会触发的事件做一下事件节流.,也就是事件增加一个<code>节流阀</code>,以限制事件的不断触发.最常见的做法就是设定一个定时器.来进行判断.事件在多少秒之内不断触发的话.就将<code>节流阀</code>打开.不进行事件操作.直达不断触发事件的行为结束之后,才进行事件操作.最常见的就是输入框的例子.如下面代码所示:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"text"</span>&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> text = <span class="built_in">document</span>.querySelector(<span class="string">'#text'</span>),</span><br><span class="line">        timer = <span class="literal">null</span>,</span><br><span class="line">        currentSearch = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    text.addEventListener(<span class="string">'keyup'</span>, (e) =&gt;&#123;</span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 声明一个当前所搜的状态变量</span></span><br><span class="line">            currentSearch ＝ <span class="string">'书'</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> searchText = e.target.value;</span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">                url: <span class="string">`search.qq.com/<span class="subst">$&#123;searchText&#125;</span>`</span>,</span><br><span class="line">                success: <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="comment">// 判断后台返回的标志与我们存的当前搜索变量是否一致</span></span><br><span class="line">                    <span class="keyword">if</span> (data.search === currentSearch) &#123;</span><br><span class="line">                        <span class="comment">// 渲染展示</span></span><br><span class="line">                        render(data);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// ..</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,<span class="number">250</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;上面的代码就是一个很常见的一个事件节流的用法.当你按下键盘触发事件时,并不是直接发送AJAX请求.而是使用<code>setTimeout</code>延迟250毫秒.在延迟的过程中如果有新的事件触发.就会重新计算延迟.如此不断的反复.直到两次触发事件的间隔大于250毫秒.才会真正的发送AJAX请求.</p>
+<p>&emsp;&emsp;下面让我们来看看上述的逻辑用RxJS怎样的实现.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button = <span class="built_in">document</span>.querySelector(<span class="string">'button'</span>);</span><br><span class="line">Rx.Observable.fromEvent(button, <span class="string">'click'</span>)</span><br><span class="line">  .debounceTime(<span class="number">250</span>)</span><br><span class="line">  .subscribe(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      $.ajax(&#123;</span><br><span class="line">        url: <span class="string">`search.qq.com/<span class="subst">$&#123;searchText&#125;</span>`</span>,</span><br><span class="line">        success: <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 判断后台返回的标志与我们存的当前搜索变量是否一致</span></span><br><span class="line">          <span class="keyword">if</span> (data.search === currentSearch) &#123;</span><br><span class="line">            <span class="comment">// 渲染展示</span></span><br><span class="line">            render(data);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// ..</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;上面是用RxJS实现的同样的功能.但我们看到其代码精简了许多.上述代码中首先获取到一个<code>button</code>元素.然后使用<code>Rx.Observable.fromEvent</code>创建了一个被观察对象.其对象所监听的是<code>button</code>元素的<code>.click</code>事件.每当<code>button</code>元素的<code>click</code>事件触发时.就会发射一个值出去.这个值途中经过<code>debounceTime</code>操作符,延时了250毫秒.然后再被观察者对象捕获.最终触发其定义的AJAX事件.这就是上述代码中的实现过程.<br>&emsp;&emsp;然而我们看到.虽然上述在定义执行的过程中做了许多的事情,但这些是RxJS在内部帮助我们就做好了的.我们只需要它给我们的API方法就可以实现用几段简单的代码,实现一段复杂的操作.</p>
+<h3 id="Observable-可观察对象"><a href="#Observable-可观察对象" class="headerlink" title="Observable (可观察对象)"></a>Observable (可观察对象)</h3><blockquote>
+<p>Observables 是多个值的惰性推送集合</p>
+</blockquote>
+<p>&emsp;&emsp;Observable是RxJS的核心概念之一.它实际上就是可以被外界观察的一个对象.当本身的状态发生变化时,就会将其变化推送给外界观察它的对象,也就是 <strong>观察者对象</strong>.同时因为<code>Observables 是多个值的惰性推送集合</code>所以只有当使用一个观察者对象去订阅了它之后.它才会同步或异步地返回零到(有可能的)无限多个值.下面是使用RxJS创建一个<code>Observable</code>的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observable = Rx.Observable.create(<span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> id = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    observer.next(<span class="string">'hi'</span>)</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面实例创建了一个 Observable，它每隔一秒会向观察者发送字符串 ‘hi’.</p>
+<h3 id="Observer-观察者"><a href="#Observer-观察者" class="headerlink" title="Observer (观察者)"></a>Observer (观察者)</h3><blockquote>
+<p>什么是观察者？ - 观察者是由 Observable 发送的值的消费者。观察者只是一组回调函数的集合，每个回调函数对应一种 Observable 发送的通知类型：next、error 和 complete 。</p>
+</blockquote>
+<p>&emsp;&emsp;简单来说,<code>Observer</code>就是使用<code>Observable</code>发送出来值的一个方法集合.当一个<code>Observable</code>发送出来值之后由<code>Observer</code>来决定如何的去使用它.而使用的方式就是通过回调函数.将<code>Observable</code>发送出来的值作为参数传入其中.让后在内部去使用.同时根据<code>Observable</code>发送出来的值不同.其调用的回调函数也不同.分别有<code>next</code>(下一步),<code>error</code>(报错),<code>complete</code>(结束).下面是使用<code>Observer</code>的方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>要使用观察者，需要把它提供给 Observable 的 subscribe 方法</p>
+</blockquote>
+<h3 id="Subscription-订阅"><a href="#Subscription-订阅" class="headerlink" title="Subscription (订阅)"></a>Subscription (订阅)</h3><blockquote>
+<p>什么是 Subscription ？ - Subscription 是表示可清理资源的对象，通常是 Observable 的执行。Subscription 有一个重要的方法，即 unsubscribe，它不需要任何参数，只是用来清理由 Subscription 占用的资源。在上一个版本的 RxJS 中，Subscription 叫做 “Disposable” (可清理对象)。</p>
+</blockquote>
+<p>&emsp;&emsp;<code>Subscription</code>(订阅)是使用<code>observable.subscribe()</code>创建一个观察者对象时.所返回的一个对象.它主要就是使用<code>unsubscribe() 函数</code>主动关闭<code>Observer</code>对<code>Observable</code>的监听订阅.其使用方法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> observable = Rx.Observable.interval(<span class="number">1000</span>);</span><br><span class="line"><span class="keyword">var</span> subscription = observable.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(x));</span><br><span class="line"><span class="comment">// 稍后：</span></span><br><span class="line"><span class="comment">// 这会取消正在进行中的 Observable 执行</span></span><br><span class="line"><span class="comment">// Observable 执行是通过使用观察者调用 subscribe 方法启动的</span></span><br><span class="line">subscription.unsubscribe();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Operators-操作符"><a href="#Operators-操作符" class="headerlink" title="Operators (操作符)"></a>Operators (操作符)</h3><blockquote>
+<p>操作符是 Observable 类型上的方法，比如 .map(…)、.filter(…)、.merge(…)，等等。当操作符被调用时，它们不会改变已经存在的 Observable 实例。相反，它们返回一个新的 Observable ，它的 subscription 逻辑基于第一个 Observable 。<br>操作符是函数，它基于当前的 Observable 创建一个新的 Observable。这是一个无副作用的操作：前面的 Observable 保持不变。</p>
+</blockquote>
+<p>&emsp;&emsp;就本质上而言<code>Operators</code>就是一个纯粹的函数.它可以接收一个 Observable 作为输入.并在经过内部的一系列处理后返回一个新的<code>Observable</code>作为输出.流向下一个操作.</p>
+<h3 id="Subject-主体"><a href="#Subject-主体" class="headerlink" title="Subject (主体)"></a>Subject (主体)</h3><blockquote>
+<p>什么是 Subject？ - RxJS Subject 是一种特殊类型的 Observable，它允许将值多播给多个观察者，所以 Subject 是多播的，而普通的 Observables 是单播的(每个已订阅的观察者都拥有 Observable 的独立执行)。<br>Subject 像是 Observalbe，但是可以多播给多个观察者。Subject 还像是 EventEmitters，维护着多个监听器的注册表。</p>
+</blockquote>
+<p>&emsp;&emsp;每一个<code>Subject</code>都同时是一个<code>Observable</code>和<code>Observer</code>.对于<code>Subject</code>你可以使用<code>subscribe</code>方法并指定一个观察者.也可以调用<code>next(v)</code>、<code>error(e)</code> 和 <code>complete()</code>来处理接受道到值.示例如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subject();</span><br><span class="line"></span><br><span class="line">subject.subscribe(&#123;</span><br><span class="line">  next: <span class="function">(<span class="params">v</span>) =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'observerA: '</span> + v)</span><br><span class="line">&#125;);</span><br><span class="line">subject.subscribe(&#123;</span><br><span class="line">  next: <span class="function">(<span class="params">v</span>) =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'observerB: '</span> + v)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">subject.next(<span class="number">1</span>);</span><br><span class="line">subject.next(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们为 Subject 添加了两个观察者，然后给 Subject 提供一些值</p>
+<h3 id="Schedulers-调度器"><a href="#Schedulers-调度器" class="headerlink" title="Schedulers (调度器)"></a>Schedulers (调度器)</h3><blockquote>
+<p>什么是调度器？ - 调度器控制着何时启动 subscription 和何时发送通知。它由三部分组成：</p>
+<ul>
+<li>调度器是一种数据结构。 它知道如何根据优先级或其他标准来存储任务和将任务进行排序。</li>
+<li>调度器是执行上下文。 它表示在何时何地执行任务(举例来说，立即的，或另一种回调函数机制(比如 setTimeout 或 process.nextTick)，或动画帧)。</li>
+<li>调度器有一个(虚拟的)时钟。 调度器功能通过它的 getter 方法 now() 提供了“时间”的概念。在具体调度器上安排的任务将严格遵循该时钟所表示的时间。<br>调度器可以让你规定 Observable 在什么样的执行上下文中发送通知给它的观察者。</li>
+</ul>
+</blockquote>
+<p>上面是我最近学习RxJS时一些粗浅的总结,希望对大家有所帮助.如果文中有何不当之处请予以斧正,谢谢.<br><strong>参考资料</strong></p>
+<ul>
+<li><p><a href="http://cn.rx.js.org/manual/overview.html#h11" target="_blank" rel="noopener">RxJS中文手册</a></p>
+</li>
+<li><p><a href="https://www.qcloud.com/community/article/191068?fromSource=gwzcw.107650.107650.107650" target="_blank" rel="noopener">构建流式应用：RxJS 详解</a></p>
+</li>
+</ul>
+<p><strong>我的个人网址:</strong> <a href="https://wangyiming.info/">https://wangyiming.info/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>王宜明</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangyiming.info/2017/08/05/初始RxJS/" title="初始RxJS">https://wangyiming.info/2017/08/05/初始RxJS/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RxJS/" rel="tag"># RxJS</a>
+            
+              <a href="/tags/观察者模式/" rel="tag"># 观察者模式</a>
+            
+              <a href="/tags/迭代模式/" rel="tag"># 迭代模式</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/07/06/对Angular中的生命周期钩子的理解/" rel="next" title="对Angular中的生命周期钩子的理解">
+                  <i class="fa fa-chevron-left"></i> 对Angular中的生命周期钩子的理解
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/01/07/ES6中的代理模式-----Proxy/" rel="prev" title="ES6中的代理模式-----Proxy">
+                  ES6中的代理模式-----Proxy <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Rx-JS"><span class="nav-number">1.</span> <span class="nav-text">什么是Rx.JS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rx-JS的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">Rx.JS的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observable-可观察对象"><span class="nav-number">1.1.1.</span> <span class="nav-text">Observable (可观察对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer-观察者"><span class="nav-number">1.1.2.</span> <span class="nav-text">Observer (观察者)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subscription-订阅"><span class="nav-number">1.1.3.</span> <span class="nav-text">Subscription (订阅)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operators-操作符"><span class="nav-number">1.1.4.</span> <span class="nav-text">Operators (操作符)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subject-主体"><span class="nav-number">1.1.5.</span> <span class="nav-text">Subject (主体)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Schedulers-调度器"><span class="nav-number">1.1.6.</span> <span class="nav-text">Schedulers (调度器)</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpeg"
+      alt="王宜明">
+  <p class="site-author-name" itemprop="name">王宜明</p>
+  <div class="site-description" itemprop="description">王宜明的技术分享博客</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yuyangzi" title="GitHub &rarr; https://github.com/yuyangzi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:wangyiming19950222@gmail.com" title="E-Mail &rarr; mailto:wangyiming19950222@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" title="Weibo &rarr; http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://twitter.com/wangyiming0222" title="Twitter &rarr; https://twitter.com/wangyiming0222" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/wangyiming19950222" title="FB Page &rarr; https://www.facebook.com/wangyiming19950222" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://juejin.im/user/59116ed2a0bb9f0058aaa03b" title="掘金 &rarr; https://juejin.im/user/59116ed2a0bb9f0058aaa03b" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>掘金</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备17022214号 </a><span><img src="/images/beian.png" style="display:inline-block;"/>
+  
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=17022214" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王宜明</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'H1bnWpntrmfbwK0yz2mQqydz-gzGzoHsz',
+    appKey: 'WFKFWEpWF7uXd4eaKgyao6ic',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-CN' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

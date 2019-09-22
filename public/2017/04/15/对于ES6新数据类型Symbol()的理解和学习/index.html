@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.">
+<meta name="keywords" content="ES6,JavaScript,数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是Symbol()类型的数据?">
+<meta property="og:url" content="https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/index.html">
+<meta property="og:site_name" content="王宜明的博客空间">
+<meta property="og:description" content="Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-21T01:10:10.269Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="什么是Symbol()类型的数据?">
+<meta name="twitter:description" content="Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.">
+  <link rel="canonical" href="https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>什么是Symbol()类型的数据? | 王宜明的博客空间</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101694997-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-101694997-1');
+    }
+  </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e113c92ba87a601d4e51df3b273b65a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王宜明的博客空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/yuyangzi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王宜明">
+      <meta itemprop="description" content="王宜明的技术分享博客">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王宜明的博客空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">什么是Symbol()类型的数据?
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-15 23:26:34" itemprop="dateCreated datePublished" datetime="2017-04-15T23:26:34+08:00">2017-04-15</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-21 09:10:10" itemprop="dateModified" datetime="2019-09-21T09:10:10+08:00">2019-09-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/前端技术/" itemprop="url" rel="index"><span itemprop="name">前端技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/" class="post-meta-item leancloud_visitors" data-flag-title="什么是Symbol()类型的数据?" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+            <div class="post-description">Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ol>
+<li><h2 id="什么是Symbol-类型的数据"><a href="#什么是Symbol-类型的数据" class="headerlink" title="什么是Symbol()类型的数据?"></a>什么是Symbol()类型的数据?</h2>Symbol()是ECMAScript2015(ECMA6)中新推出的一种基本的数据类型.MDN上介绍到:</li>
+</ol>
+<blockquote>
+<p> Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.<br>—<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol" target="_blank" rel="noopener">MDN</a></p>
+</blockquote>
+<p>简单点来说:</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* ```Symbol()```对象是```symbol```基本类型数据的隐式对象包装器.其相当与```String()```和```string```、```Number()```和```number```、```Boole()```和```boole```.</span><br><span class="line">* ```symbol```是基本数据类型.</span><br><span class="line"></span><br><span class="line">2. ## Symbol()的基本语法和特性</span><br><span class="line">    * 创建一个Symbol类型的数据:</span><br><span class="line"></span><br><span class="line">        1. 创建局部的Symbol:</span><br><span class="line"></span><br><span class="line">        ```javascript</span><br><span class="line">        let s = Symbol();</span><br><span class="line"></span><br><span class="line">        s // Symbol()</span><br></pre></td></tr></table></figure>
+
+<pre><code>2. 创建全局的Symbol:
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="built_in">Symbol</span>.for();</span><br><span class="line"></span><br><span class="line">s <span class="comment">//Symbol(undefined)</span></span><br></pre></td></tr></table></figure></code></pre><p>  <em>注意:</em> 通过Symbol函数创建Symbol数据时,不能使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* Symbol的实例描述:</span><br><span class="line"></span><br><span class="line">在使用```Symbol()```函数创建Symbol实例时,可以在```Symbol()```函数中传入参数,以用做对Symbol实例的描述.</span><br><span class="line">```JavaScript</span><br><span class="line">let s1 = Symbol(&quot;这是一个Symbol实例的描述1&quot;);</span><br><span class="line">let s2 = Symbol(&quot;这是一个Symbol实例的描述2&quot;);</span><br><span class="line"></span><br><span class="line">s1 // Symbol(这是一个Symbol实例的描述1)</span><br><span class="line">s2 // Symbol(这是一个Symbol实例的描述2)</span><br></pre></td></tr></table></figure></p>
+<p>  在上面那段代码中我们创建了两个Symbol类型的实例,如果不添加描述的话,在控制台中打印两个实例.其得到的结果将都是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* Symbol类型数据的特性:</span><br><span class="line"></span><br><span class="line">    1. 每一个Symbol实例都是独一无二的.</span><br><span class="line"></span><br><span class="line">    任何情况下两个Symbol实例都不会相等,这个与JavaScript中其他的几种数据类型不同.</span><br><span class="line"></span><br><span class="line">    ```JavaScript</span><br><span class="line">    let a = Symbol();</span><br><span class="line">    let b = Symbol();</span><br><span class="line"></span><br><span class="line">    a === b // false</span><br><span class="line"></span><br><span class="line">    let s1 = Symbol(&quot;Symbol实例&quot;);</span><br><span class="line">    let s2 = Symbol(&quot;Symbol实例&quot;);</span><br><span class="line"></span><br><span class="line">    s1 //Symbol(Symbol实例)</span><br><span class="line">    s2 //Symbol(Symbol实例)</span><br><span class="line"></span><br><span class="line">    s1 === s2 // false</span><br></pre></td></tr></table></figure></p>
+<pre><code>2. Symbol实例不能与其他类型的数据进行运算,但可以显示的转换成字符串和布尔值.
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="comment">//和字符串进行运算</span></span><br><span class="line"><span class="string">"s"</span> + a <span class="comment">//TypeError: Cannot convert a Symbol value to a string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//和数字进行运算</span></span><br><span class="line"><span class="number">1</span> + a <span class="comment">//TypeError: Cannot convert a Symbol value to a number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//和布尔值进行运算</span></span><br><span class="line"><span class="literal">false</span> + a <span class="comment">//TypeError: Cannot convert a Symbol value to a number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//和数组进行运算</span></span><br><span class="line">[] + a <span class="comment">//TypeError: Cannot convert a Symbol value to a string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//和对象进行运算</span></span><br><span class="line">(&#123;&#125;) + a <span class="comment">//TypeError: Cannot convert a Symbol value to a string</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成字符串</span></span><br><span class="line">a.toString() <span class="comment">//"Symbol()"</span></span><br><span class="line"><span class="built_in">String</span>(a) <span class="comment">//"Symbol()"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成布尔值</span></span><br><span class="line">!!a <span class="comment">//true;</span></span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><p>内置的Symbol值:</p>
+<ol>
+<li><p><strong>Symbol.hasInstance</strong></p>
+<blockquote>
+<p>对象的Symbol.hasInstance属性，指向一个内部方法。当其他对象使用instanceof运算符，判断是否为该对象的实例时，会调用这个方法。比如，foo instanceof Foo在语言内部，实际调用的是Foo[Symbol.hasInstance](foo)。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.isConcatSpreadable</strong></p>
+<blockquote>
+<p>对象的Symbol.isConcatSpreadable属性等于一个布尔值，表示该对象使用Array.prototype.concat()时，是否可以展开。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.species</strong></p>
+<blockquote>
+<p>对象的Symbol.species属性，指向当前对象的构造函数。创造实例时，默认会调用这个方法，即使用这个属性返回的函数当作构造函数，来创造新的实例对象。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.match</strong></p>
+<blockquote>
+<p>对象的Symbol.match属性，指向一个函数。当执行str.match(myObject)时，如果该属性存在，会调用它，返回该方法的返回值。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.replace</strong></p>
+<blockquote>
+<p>对象的Symbol.replace属性，指向一个方法，当该对象被String.prototype.replace方法调用时，会返回该方法的返回值。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.search</strong></p>
+<blockquote>
+<p>对象的Symbol.search属性，指向一个方法，当该对象被String.prototype.search方法调用时，会返回该方法的返回值。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.split</strong></p>
+<blockquote>
+<p>对象的Symbol.split属性，指向一个方法，当该对象被String.prototype.split方法调用时，会返回该方法的返回值。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.iterator</strong></p>
+<blockquote>
+<p>对象的Symbol.iterator属性，指向该对象的默认遍历器方法。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.toPrimitive</strong></p>
+<blockquote>
+<p>对象的Symbol.toPrimitive属性，指向一个方法。该对象被转为原始类型的值时，会调用这个方法，返回该对象对应的原始类型值。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.toStringTag</strong></p>
+<blockquote>
+<p>对象的Symbol.toStringTag属性，指向一个方法。在该对象上面调用Object.prototype.toString方法时，如果这个属性存在，它的返回值会出现在toString方法返回的字符串之中，表示对象的类型。也就是说，这个属性可以用来定制[object Object]或[object Array]中object后面的那个字符串。</p>
+</blockquote>
+</li>
+<li><p><strong>Symbol.unscopables</strong></p>
+<blockquote>
+<p>对象的Symbol.unscopables属性，指向一个对象。该对象指定了使用with关键字时，哪些属性会被with环境排除。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><h2 id="使用Symbol实例作为对象的属性名"><a href="#使用Symbol实例作为对象的属性名" class="headerlink" title="使用Symbol实例作为对象的属性名"></a>使用Symbol实例作为对象的属性名</h2></li>
+</ol>
+<p>前面说到过,Symbol实例因为其不可变得特性,适合作为对象的属性名来使用.以防止属性被改写和覆盖.然而,Symbol实例怎么样来保证属性名不会被改写了.难道是,用Symbol实例定义的属性就不能修改值了吗?让我们来试试.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> obj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">obj[a] = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">obj[a] <span class="comment">//10</span></span><br><span class="line"></span><br><span class="line">obj[a] = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">obj[a] <span class="comment">//20</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中我们可以看到,使用Symbol实例作为属性名,并不是不能修改的.在最开始我们将<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">事实上,Symbol实例的不可变更的特性,是要在两个及两个以上的作用域中才能体现出来.请看下面的代码.</span><br><span class="line"></span><br><span class="line">```JavaScript</span><br><span class="line">let a = Symbol();</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">&#123;</span><br><span class="line">    obj[a] = 10;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    let a = Symbol();</span><br><span class="line">    obj[a] = 20;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">obj //Object &#123;Symbol(): 10, Symbol(): 20&#125;</span><br><span class="line">obj[a] //10</span><br></pre></td></tr></table></figure></p>
+<p>在上面代码中可以看到,我们在全局作用域中声明了一个Symbol <code>a</code> 实例和一个对象 <code>obj</code> ,然后在一个代码块中将<code>obj[a] = 10</code>赋值.之后在另一个代码块中再次声明一个Symbol()的实例 <code>a</code> ,并将 <code>obj[a] = 20</code><br>最后在全局下打印<code>obj[a]</code>,结果为10,并没有被改写.而打印<code>obj</code>则结果为<code>Object {Symbol(): 10, Symbol(): 20}</code>,其定义的两个属性都存在.<br>这就是Symbol实例的不可变特性,因为每一个Symbol实例都是独一无二的,所以你在另一个代码块中声明同样的一个Symbol实例的变量,也依然不会将之前的给覆盖掉.这就是使用Symbol实例作为属性名的作用.</p>
+<p>另外,使用Symbol实例作为属性名还有着一下特性:</p>
+<ol>
+<li><blockquote>
+<p>Symbol 值作为对象属性名时，不能用点运算符。</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p> Symbol 作为属性名，该属性不会出现在for…in、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象的所有 Symbol 属性名。</p>
+</blockquote>
+</li>
+</ol>
+<p>以上就是我对与Symbol这个新数据类型的理解和学习,希望对大家有所帮助.同时如果文中有什么不当之处,请予以斧正,谢谢!</p>
+<p><strong>参考资料</strong> : <a href="http://es6.ruanyifeng.com/#docs/symbol" target="_blank" rel="noopener">ECMAScript 6 入门第十章 Symbol篇</a> 作者：<a href="http://www.ruanyifeng.com/home.html" target="_blank" rel="noopener">阮一峰</a></p>
+<p><strong>我的个人网址:</strong> <a href="https://wangyiming.info/">https://wangyiming.info/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>王宜明</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/" title="什么是Symbol()类型的数据?">https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+            
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            
+              <a href="/tags/数据类型/" rel="tag"># 数据类型</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/04/04/优化JS动画之requestAnimationFrame/" rel="next" title="优化动画之requestAnimationFrame">
+                  <i class="fa fa-chevron-left"></i> 优化动画之requestAnimationFrame
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/04/16/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout/" rel="prev" title="CSS 新特性之Native Variables、Feature Queries、Grid Layout">
+                  CSS 新特性之Native Variables、Feature Queries、Grid Layout <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Symbol-类型的数据"><span class="nav-number">1.</span> <span class="nav-text">什么是Symbol()类型的数据?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Symbol实例作为对象的属性名"><span class="nav-number">2.</span> <span class="nav-text">使用Symbol实例作为对象的属性名</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpeg"
+      alt="王宜明">
+  <p class="site-author-name" itemprop="name">王宜明</p>
+  <div class="site-description" itemprop="description">王宜明的技术分享博客</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yuyangzi" title="GitHub &rarr; https://github.com/yuyangzi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:wangyiming19950222@gmail.com" title="E-Mail &rarr; mailto:wangyiming19950222@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" title="Weibo &rarr; http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://twitter.com/wangyiming0222" title="Twitter &rarr; https://twitter.com/wangyiming0222" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/wangyiming19950222" title="FB Page &rarr; https://www.facebook.com/wangyiming19950222" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://juejin.im/user/59116ed2a0bb9f0058aaa03b" title="掘金 &rarr; https://juejin.im/user/59116ed2a0bb9f0058aaa03b" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>掘金</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备17022214号 </a><span><img src="/images/beian.png" style="display:inline-block;"/>
+  
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=17022214" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王宜明</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'H1bnWpntrmfbwK0yz2mQqydz-gzGzoHsz',
+    appKey: 'WFKFWEpWF7uXd4eaKgyao6ic',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-CN' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

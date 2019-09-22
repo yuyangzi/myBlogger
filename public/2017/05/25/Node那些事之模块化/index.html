@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.其好处是:保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处">
+<meta name="keywords" content="Node,Node那些事系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node那些事之模块化">
+<meta property="og:url" content="https://wangyiming.info/2017/05/25/Node那些事之模块化/index.html">
+<meta property="og:site_name" content="王宜明的博客空间">
+<meta property="og:description" content="把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.其好处是:保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-21T01:10:10.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node那些事之模块化">
+<meta name="twitter:description" content="把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.其好处是:保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处">
+  <link rel="canonical" href="https://wangyiming.info/2017/05/25/Node那些事之模块化/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Node那些事之模块化 | 王宜明的博客空间</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101694997-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-101694997-1');
+    }
+  </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e113c92ba87a601d4e51df3b273b65a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王宜明的博客空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/yuyangzi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://wangyiming.info/2017/05/25/Node那些事之模块化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王宜明">
+      <meta itemprop="description" content="王宜明的技术分享博客">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王宜明的博客空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Node那些事之模块化
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-25 14:27:24" itemprop="dateCreated datePublished" datetime="2017-05-25T14:27:24+08:00">2017-05-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-21 09:10:10" itemprop="dateModified" datetime="2019-09-21T09:10:10+08:00">2019-09-21</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/" itemprop="url" rel="index"><span itemprop="name">原创</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/原创/前端技术/" itemprop="url" rel="index"><span itemprop="name">前端技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2017/05/25/Node那些事之模块化/" class="post-meta-item leancloud_visitors" data-flag-title="Node那些事之模块化" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/05/25/Node那些事之模块化/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2017/05/25/Node那些事之模块化/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+            <div class="post-description">把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.其好处是:保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是模块化开发-及模块化开发的好处"><a href="#什么是模块化开发-及模块化开发的好处" class="headerlink" title="什么是模块化开发,及模块化开发的好处"></a>什么是模块化开发,及模块化开发的好处</h2><ul>
+<li><strong>什么是模块化开发:</strong> 把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.</li>
+<li><strong>好处:</strong> 保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处</li>
+</ul>
+<h2 id="Node中如何实现模块化开发"><a href="#Node中如何实现模块化开发" class="headerlink" title="Node中如何实现模块化开发"></a>Node中如何实现模块化开发</h2><p>在Node中主要通过三个东西实现模块化开发:</p>
+<ul>
+<li><strong>module:</strong> 表示一个模块,在Node中最常见的模块就是一个一个的JS文件.</li>
+<li><strong>require:</strong> 作用是加载其他模块用的.在一个JS文件中如果想要引用其他JS文件的成员,就需要使用<code>require</code>.</li>
+<li><strong>exports:</strong> 在Node的模块中,如果要这个模块向外暴露一些成员,以供其它JS模块使用,那么就要使用<code>exports</code></li>
+</ul>
+<p>Node中的模块化主要是为了解决JS文件之间的相互依赖关系</p>
+<h2 id="Node中模块的分类"><a href="#Node中模块的分类" class="headerlink" title="Node中模块的分类"></a>Node中模块的分类</h2><p>Node有三部分组成:ECMAScript + 核心API + 第三方包</p>
+<h3 id="核心API"><a href="#核心API" class="headerlink" title="核心API"></a>核心API</h3><ul>
+<li>什么是核心API: 由Node官方将一些常用的功能模块编译成二进制的执行文件,然后集成到Node的安装包中.在我们安装完Node之后,也同时安装了这些功能模块.</li>
+<li>如何使用核心模块:  使用require(“核心模块名称”)如下例<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> XXX = <span class="built_in">require</span>(<span class="string">"XXX"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a>第三方模块</h3><ul>
+<li><p>什么是第三方模块: 除了官方提供的核心模块之外,我们在日常开发中也许还有一些使用频率很高的功能代码.而这些功能就被一些厉害的团队、个人、公司打包成可复用的模块.并通过NPM官网托管出去,供其他人下载使用.</p>
+</li>
+<li><p>如何使用第三方模块:</p>
+<ol>
+<li>先使用npm下载这个模块.</li>
+<li>使用require导入你所下载的第三方模块.你导入模块的名字就是你安装时的名字.</li>
+<li>通过查阅官方文档,使用你所下载的第三方模块</li>
+</ol>
+</li>
+<li><p><em>注意:*</em>无论是核心模块还是第三方模块,都是通过 <strong><em>标识符名称</em></strong> 来引用这个模块的.</p>
+</li>
+</ul>
+<h3 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h3><ul>
+<li>什么是用户模块: 自己所写的JS文件,统统属于用户模块</li>
+<li>用户模块向外导出成员的两种方式:<ol>
+<li>使用global这个全局对象,将你想要导出的成员挂载到这个对象上面.但是这种方法有两个缺陷.<ul>
+<li>会造成全局变量污染</li>
+<li>不知道所引用的成员是谁导出的.<br>所以一般情况下我们使用下面这种方式.</li>
+</ul>
+</li>
+<li>使用exports来导出需要暴露的成员</li>
+</ol>
+</li>
+</ul>
+<h2 id="exports和module-exports"><a href="#exports和module-exports" class="headerlink" title="exports和module.exports"></a>exports和module.exports</h2><ol>
+<li>通过module.exports可以使用 <code>.</code> 的形式追加属性,也可以使用 <code>=</code> 直接赋值的形式导出成员</li>
+<li>exports只能通过 <code>.</code> 的形式追加属性,不能使用 <code>=</code> 直接赋值的形式</li>
+<li>在一个module中,最终向外暴露的成员,以<code>module.exports</code>指向的对象为准.</li>
+<li>在一个module中,不要混合使用<code>module.exports</code>和<code>exports</code>.</li>
+</ol>
+<h2 id="Node中的模块加载规则"><a href="#Node中的模块加载规则" class="headerlink" title="Node中的模块加载规则"></a>Node中的模块加载规则</h2><p><strong>优先从缓存中加载</strong></p>
+<ul>
+<li><p>加载核心模块: 优先从缓存中加载,如果缓存中没有再去执行加载核心模块</p>
+</li>
+<li><p>加载自己的模块: 优先从缓存中加载,如果缓存中没有,再去执行加载自己的模块.<br>用户模块的查找规则:<br>不过不写后缀名,则先严格按照给定的文件名去查找模块并加载.如果找不到,则按照一定的规则顺序去查找加载带后缀名的同名文件.如下例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index -&gt; index.js -&gt; index.json -&gt; index.node</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三方的模块查找规则:</p>
+<ol>
+<li>首先查看项目的跟目录下有没有<code>node_modules</code>这个文件夹.</li>
+<li>查找<code>node_modules</code>文件夹中有没和第三方模块名称一致的文件夹.</li>
+<li>在模块对应的文件夹中,查找有没有<code>package.json</code>这个文件</li>
+<li>在<code>package.json</code>文件中查找有没有<code>main</code>属性.</li>
+<li>如果有<code>main</code>属性,并且<code>main</code>属性指向的路径存在,那么就尝试加载这个路径指定的文件</li>
+<li>如果<code>package.json</code>文件中,没有<code>main</code>属性,或者<code>main</code>属性指向的路径不存在,或者干脆就没有<code>package.json</code>文件.那么,就会尝试加载模块根目录中的<code>index</code>相关文件:<code>index.js -&gt; index.json -&gt; index.node</code></li>
+<li>如果在<code>node_modules</code>文件中找不到对应的模块文件夹,或者在项目根目录中就没有<code>node_modules</code>这个文件夹.则会向上一层的文件夹中查找,查找规则同上.</li>
+<li>如果上一层文件夹得目录中也没有找到,则再向上一层文件夹中去找,直到找到当前项目所在的盘符根目录为止.</li>
+<li>如果找到盘符根目录还没有找到,则报错:<code>cannot find module ***</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="关于模块化"><a href="#关于模块化" class="headerlink" title="关于模块化"></a>关于模块化</h2><ul>
+<li>Node中的模块化基于<code>common.js</code>,其特点是有所的依赖项同步加载.</li>
+<li><code>common.js</code>由于是一个同步加载规范,所以不适合浏览端使用.于是浏览端有了异步模块加载机制AMD规范.</li>
+<li>在ES6中已推出了语言规格上的模块化方案.</li>
+</ul>
+<p><strong>我的个人网址:</strong> <a href="https://wangyiming.info/">https://wangyiming.info/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>王宜明</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wangyiming.info/2017/05/25/Node那些事之模块化/" title="Node那些事之模块化">https://wangyiming.info/2017/05/25/Node那些事之模块化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Node/" rel="tag"># Node</a>
+            
+              <a href="/tags/Node那些事系列/" rel="tag"># Node那些事系列</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/04/22/关于JavaScript 基本型数据和引用型数据的区别/" rel="next" title="关于JavaScript 基本型数据和引用型数据的区别。">
+                  <i class="fa fa-chevron-left"></i> 关于JavaScript 基本型数据和引用型数据的区别。
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2017/05/28/对ES6Generator函数的理解/" rel="prev" title="对ES6Generator函数的理解">
+                  对ES6Generator函数的理解 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是模块化开发-及模块化开发的好处"><span class="nav-number">1.</span> <span class="nav-text">什么是模块化开发,及模块化开发的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node中如何实现模块化开发"><span class="nav-number">2.</span> <span class="nav-text">Node中如何实现模块化开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node中模块的分类"><span class="nav-number">3.</span> <span class="nav-text">Node中模块的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心API"><span class="nav-number">3.1.</span> <span class="nav-text">核心API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方模块"><span class="nav-number">3.2.</span> <span class="nav-text">第三方模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户模块"><span class="nav-number">3.3.</span> <span class="nav-text">用户模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exports和module-exports"><span class="nav-number">4.</span> <span class="nav-text">exports和module.exports</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node中的模块加载规则"><span class="nav-number">5.</span> <span class="nav-text">Node中的模块加载规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于模块化"><span class="nav-number">6.</span> <span class="nav-text">关于模块化</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpeg"
+      alt="王宜明">
+  <p class="site-author-name" itemprop="name">王宜明</p>
+  <div class="site-description" itemprop="description">王宜明的技术分享博客</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/yuyangzi" title="GitHub &rarr; https://github.com/yuyangzi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:wangyiming19950222@gmail.com" title="E-Mail &rarr; mailto:wangyiming19950222@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" title="Weibo &rarr; http://weibo.com/3641588232/profile?topnav=1&wvr=6&is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://twitter.com/wangyiming0222" title="Twitter &rarr; https://twitter.com/wangyiming0222" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.facebook.com/wangyiming19950222" title="FB Page &rarr; https://www.facebook.com/wangyiming19950222" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://juejin.im/user/59116ed2a0bb9f0058aaa03b" title="掘金 &rarr; https://juejin.im/user/59116ed2a0bb9f0058aaa03b" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>掘金</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"><a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">粤ICP备17022214号 </a><span><img src="/images/beian.png" style="display:inline-block;"/>
+  
+  <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=17022214" rel="noopener" target="_blank"> </a>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王宜明</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'H1bnWpntrmfbwK0yz2mQqydz-gzGzoHsz',
+    appKey: 'WFKFWEpWF7uXd4eaKgyao6ic',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-CN' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
