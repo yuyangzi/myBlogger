@@ -1,6 +1,6 @@
 ---
 title: 对Angular中的生命周期钩子的理解
-date: 2017/7/6 20:46:34
+date: 2017-7-6 20:46:34
 tags:
 - Angular
 - 前端框架

@@ -1,6 +1,6 @@
 ---
 title: JavaScript中的装饰器--Decorator
-date: 2018/3/21 22:43:30
+date: 2018-3-21 22:43:30
 tags:
 - JavaScript
 - Decorator

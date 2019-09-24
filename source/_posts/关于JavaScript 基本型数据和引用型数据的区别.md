@@ -1,6 +1,6 @@
 ---
 title: 关于JavaScript 基本型数据和引用型数据的区别。
-date: 2017/4/22 17:26:34
+date: 2017-4-22 17:26:34
 tags:
 - JavaScript
 - 数据类型

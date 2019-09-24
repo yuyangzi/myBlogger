@@ -1,6 +1,6 @@
 ---
 title: WEB应用内容安全策略(Content Security Policy)
-date: 2019/2/20 23:24:12
+date: 2019-2-20 23:24:12
 tags:
 - HTTP
 - 安全

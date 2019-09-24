@@ -1,6 +1,6 @@
 ---
 title: 对JavaScript中闭包的理解
-date: 2017/3/28 13:26:34
+date: 2017-3-28 13:26:34
 tags:
 - JavaScript
 - 闭包

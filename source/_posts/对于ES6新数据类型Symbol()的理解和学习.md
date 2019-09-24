@@ -1,6 +1,6 @@
 ---
 title: 什么是Symbol()类型的数据?
-date: 2017/4/15 23:26:34
+date: 2017-4-15 23:26:34
 tags:
 - ES6
 - JavaScript

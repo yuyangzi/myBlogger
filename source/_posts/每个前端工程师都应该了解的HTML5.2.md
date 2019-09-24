@@ -1,6 +1,6 @@
 ---
 title: 每个前端工程师都应该了解的HTML5.2
-date: 2018/1/9 23:13:34
+date: 2018-1-9 23:13:34
 tags:
 - HTML5
 categories:
