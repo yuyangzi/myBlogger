@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://wangyiming.info</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/06/21/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E4%B9%8BCORS/</loc>
+        <lastmod>2019-09-24T05:26:41.410Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/04/15/%E5%AF%B9%E4%BA%8EES6%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BSymbol()%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2019-09-24T05:26:41.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2018/05/03/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%89%8D%E7%AB%AF%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88--indexedDB/</loc>
+        <lastmod>2019-09-24T05:26:41.403Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/03/16/%E7%90%86%E8%A7%A3%E4%BB%80%E4%B9%88%E6%98%AF%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1/</loc>
+        <lastmod>2019-09-24T05:26:41.400Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/04/22/%E5%85%B3%E4%BA%8EJavaScript%20%E5%9F%BA%E6%9C%AC%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%92%8C%E5%BC%95%E7%94%A8%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
+        <lastmod>2019-09-24T05:26:41.397Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/04/04/%E4%BC%98%E5%8C%96JS%E5%8A%A8%E7%94%BB%E4%B9%8BrequestAnimationFrame/</loc>
+        <lastmod>2019-09-24T05:26:41.395Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/03/18/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E8%AE%A4%E8%AF%86node/</loc>
+        <lastmod>2019-09-24T05:26:41.391Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/07/06/%E5%AF%B9Angular%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+        <lastmod>2019-09-24T05:26:41.387Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/05/25/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E6%A8%A1%E5%9D%97%E5%8C%96/</loc>
+        <lastmod>2019-09-24T05:26:41.384Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2018/03/21/JavaScript%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8--Decorator/</loc>
+        <lastmod>2019-09-24T05:26:41.380Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2018/01/07/ES6%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F-----Proxy/</loc>
+        <lastmod>2019-09-24T05:26:41.373Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/01/16/%E5%9C%A8HTML5%E7%9A%84%E6%97%B6%E4%BB%A3,%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86Cookie/</loc>
+        <lastmod>2019-09-24T05:26:41.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/08/05/%E5%88%9D%E5%A7%8BRxJS/</loc>
+        <lastmod>2019-09-24T05:26:41.363Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2019/02/20/HTPP%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5(Content%20Security%20Policy)/</loc>
+        <lastmod>2019-09-24T05:26:41.359Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/03/28/%E5%AF%B9JavaScript%E4%B8%AD%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+        <lastmod>2019-09-24T05:26:41.350Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2018/01/09/%E6%AF%8F%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%83%BD%E5%BA%94%E8%AF%A5%E4%BA%86%E8%A7%A3%E7%9A%84HTML5.2/</loc>
+        <lastmod>2019-09-24T05:26:41.343Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/04/16/CSS%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Native%20Variables%E3%80%81%20Feature%20Queries%E3%80%81Grid%20Layout/</loc>
+        <lastmod>2019-09-24T05:22:39.530Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://wangyiming.info/2017/05/28/%E5%AF%B9ES6Generator%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+        <lastmod>2019-09-24T02:58:55.067Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

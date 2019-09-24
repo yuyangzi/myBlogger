@@ -1,126 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59ca137c-1c2b-4272-b850-a923fd46e31b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/01/16/在HTML5的时代,重新认识Cookie/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/01/16/在HTML5的时代,重新认识Cookie/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/03/16/理解什么是的面向对象设计/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/03/16/理解什么是的面向对象设计/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/03/18/Node那些事之认识node/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/03/18/Node那些事之认识node/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/03/28/对JavaScript中闭包的理解/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/03/28/对JavaScript中闭包的理解/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/04/04/优化JS动画之requestAnimationFrame/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/04/04/优化JS动画之requestAnimationFrame/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/04/16/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/04/16/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/04/22/关于JavaScript 基本型数据和引用型数据的区别/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/04/22/关于JavaScript 基本型数据和引用型数据的区别/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/05/25/Node那些事之模块化/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/05/25/Node那些事之模块化/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/05/28/对ES6Generator函数的理解/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/05/28/对ES6Generator函数的理解/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/06/21/前端跨域之CORS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/06/21/前端跨域之CORS/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/07/06/对Angular中的生命周期钩子的理解/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/07/06/对Angular中的生命周期钩子的理解/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2017/08/05/初始RxJS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2017/08/05/初始RxJS/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2018/01/07/ES6中的代理模式-----Proxy/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2018/01/07/ES6中的代理模式-----Proxy/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2018/01/09/每个前端工程师都应该了解的HTML5.2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2018/01/09/每个前端工程师都应该了解的HTML5.2/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2018/03/21/JavaScript中的装饰器--Decorator/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2018/03/21/JavaScript中的装饰器--Decorator/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2018/05/26/新一代的前端存储方案--indexedDB/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/2019/02/20/HTPP内容安全策略(Content Security Policy)/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/2019/02/20/HTPP内容安全策略(Content Security Policy)/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/01/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/01/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/03/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/03/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/04/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/04/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/05/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/05/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/06/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/06/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/07/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/07/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/08/index 2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/08/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/08/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2017/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2017/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2018/01/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2018/01/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2018/03/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2018/03/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2018/05/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2018/05/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2018/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2018/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2019/02/index 2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2019/02/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2019/02/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/2019/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/2019/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/archives/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/archives/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/原创/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/原创/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/原创/前端技术/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/原创/前端技术/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/Can-I-USE-CSS-Cgid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avatar.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/beian.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/favicon-16x16.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/favicon-32x32.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/algolia-search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bookmark.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/local-search.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/local-search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/motion.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/motion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/next-boot.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/next-boot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/schemes/muse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/schemes/pisces.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/schemes/pisces.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/anime.min 2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/anime.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/anime.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/font-awesome/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/font-awesome/css/font-awesome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/font-awesome/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/font-awesome/css/font-awesome.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/velocity/velocity.min 2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/velocity/velocity.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/velocity/velocity.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lib/velocity/velocity.ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/lib/velocity/velocity.ui.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/page/2/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/page/3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/page/3/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/page/4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/page/4/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/search.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/AJAX/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/AJAX/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Angular/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Angular/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/CSS/index 2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/CSS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/CSS/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Cookie/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Cookie/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Decorator/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Decorator/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/ES6/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/ES6/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/HTML5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/HTML5/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/HTTP/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/HTTP/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/JavaScript/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/JavaScript/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Node/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Node/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Node那些事系列/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Node那些事系列/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/Proxy/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/Proxy/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/RxJS/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/RxJS/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/代理模式/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/代理模式/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/前端框架/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/前端框架/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/安全/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/安全/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/异步编程/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/异步编程/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/数据类型/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/数据类型/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/本地储存/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/本地储存/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/程序设计/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/程序设计/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/观察者模式/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/观察者模式/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/设计模式/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/设计模式/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/跨域/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/跨域/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/迭代模式/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/迭代模式/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/闭包/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/闭包/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/面向对象/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/面向对象/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/页面动画/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/页面动画/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/页面布局/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/页面布局/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/ES6中的代理模式-----Proxy.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/ES6中的代理模式-----Proxy.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/HTPP内容安全策略(Content Security Policy).md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/HTPP内容安全策略(Content Security Policy).md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/JavaScript中的装饰器--Decorator.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/JavaScript中的装饰器--Decorator.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/Node那些事之模块化.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node那些事之模块化.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/Node那些事之认识node.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/Node那些事之认识node.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/优化JS动画之requestAnimationFrame.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/优化JS动画之requestAnimationFrame.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/关于JavaScript 基本型数据和引用型数据的区别.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/关于JavaScript 基本型数据和引用型数据的区别.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/初始RxJS.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/初始RxJS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/前端跨域之CORS.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/前端跨域之CORS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/在HTML5的时代,重新认识Cookie.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/在HTML5的时代,重新认识Cookie.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/对Angular中的生命周期钩子的理解.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/对Angular中的生命周期钩子的理解.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/对JavaScript中闭包的理解.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/对JavaScript中闭包的理解.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/对于ES6新数据类型Symbol()的理解和学习.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/对于ES6新数据类型Symbol()的理解和学习.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/新一代的前端存储方案--indexedDB.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/新一代的前端存储方案--indexedDB.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/每个前端工程师都应该了解的HTML5.2.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/每个前端工程师都应该了解的HTML5.2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/_posts/理解什么是的面向对象设计.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/理解什么是的面向对象设计.md" afterDir="false" />
-    </list>
+    <list default="true" id="59ca137c-1c2b-4272-b850-a923fd46e31b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,8 +102,16 @@
       <workItem from="1569041639988" duration="5915000" />
       <workItem from="1569293961424" duration="1438000" />
       <workItem from="1569302178986" duration="180000" />
-      <workItem from="1569302373267" duration="1092000" />
+      <workItem from="1569302373267" duration="1337000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: 优化博客配置">
+      <created>1569303627982</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569303627983</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,5 +134,7 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/themes/next" />
     </ignored-roots>
+    <MESSAGE value="feat: 优化博客配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 优化博客配置" />
   </component>
 </project>

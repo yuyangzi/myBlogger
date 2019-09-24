@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>王宜明的博客空间</title>
+  <icon>https://wangyiming.info/icon.png</icon>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://wangyiming.info/"/>
+  <updated>2019-09-24T05:26:41.359Z</updated>
+  <id>https://wangyiming.info/</id>
+  
+  <author>
+    <name>王宜明</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WEB应用内容安全策略(Content Security Policy)</title>
+    <link href="https://wangyiming.info/2019/02/20/HTPP%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5(Content%20Security%20Policy)/"/>
+    <id>https://wangyiming.info/2019/02/20/HTPP内容安全策略(Content Security Policy)/</id>
+    <published>2019-02-20T15:24:12.000Z</published>
+    <updated>2019-09-24T05:26:41.359Z</updated>
+    
+    <summary type="html">
+    
+      内容安全策略(Content Security Policy)简称CSP是由W3C小组定义的一项规范,其主要作用是提供一个额外的安全层,用于检测并削弱某些特定类型的攻击,包括跨站脚本 (XSS) 和数据注入攻击等.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HTTP" scheme="https://wangyiming.info/tags/HTTP/"/>
+    
+      <category term="安全" scheme="https://wangyiming.info/tags/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>新一代的前端存储方案--indexedDB</title>
+    <link href="https://wangyiming.info/2018/05/03/%E6%96%B0%E4%B8%80%E4%BB%A3%E7%9A%84%E5%89%8D%E7%AB%AF%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88--indexedDB/"/>
+    <id>https://wangyiming.info/2018/05/03/新一代的前端存储方案--indexedDB/</id>
+    <published>2018-05-03T14:31:21.000Z</published>
+    <updated>2019-09-24T05:26:41.403Z</updated>
+    
+    <summary type="html">
+    
+      我们都知道在前端开发当中,有时会因为某些需求,要将一些数据存储在前端本地当中.比如说:为了优化性能,将一些常用的数据存在本地,这样以后需要的时候直接从本地拿,不需要再向后端进行请求.还有就是为了防止CSRF攻击,后端给前端一个token,前端就需要将这个token存在本地.之后每次请求都需要带上这个token.等等不一而足。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HTML5" scheme="https://wangyiming.info/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript中的装饰器--Decorator</title>
+    <link href="https://wangyiming.info/2018/03/21/JavaScript%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8--Decorator/"/>
+    <id>https://wangyiming.info/2018/03/21/JavaScript中的装饰器--Decorator/</id>
+    <published>2018-03-21T14:43:30.000Z</published>
+    <updated>2019-09-24T05:26:41.380Z</updated>
+    
+    <summary type="html">
+    
+      修饰模式(Decortaor)，是面向对象编程领域中，一种动态地往一个类中添加新的行为的设计模式。就功能而言，修饰模式相比生成子类更为灵活，这样可以给某个对象而不是整个类添加一些功能。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="Decorator" scheme="https://wangyiming.info/tags/Decorator/"/>
+    
+      <category term="设计模式" scheme="https://wangyiming.info/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每个前端工程师都应该了解的HTML5.2</title>
+    <link href="https://wangyiming.info/2018/01/09/%E6%AF%8F%E4%B8%AA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%83%BD%E5%BA%94%E8%AF%A5%E4%BA%86%E8%A7%A3%E7%9A%84HTML5.2/"/>
+    <id>https://wangyiming.info/2018/01/09/每个前端工程师都应该了解的HTML5.2/</id>
+    <published>2018-01-09T15:13:34.000Z</published>
+    <updated>2019-09-24T05:26:41.343Z</updated>
+    
+    <summary type="html">
+    
+      一般在W3C当中.对版本的发布会经过四个阶段分别是:工作草案（WD）、备选推荐标准（CR）、提案推荐标准（PR）和最终的W3C正式推荐标准（REC）.而当一个规范到达REC阶段时，就意味着它已经得到了W3C成员的正式认可，并推荐它由用户代理部署，前端工程师进行使用。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HTML5" scheme="https://wangyiming.info/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6中的代理模式-----Proxy</title>
+    <link href="https://wangyiming.info/2018/01/07/ES6%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F-----Proxy/"/>
+    <id>https://wangyiming.info/2018/01/07/ES6中的代理模式-----Proxy/</id>
+    <published>2018-01-07T14:30:34.000Z</published>
+    <updated>2019-09-24T05:26:41.373Z</updated>
+    
+    <summary type="html">
+    
+      简单来说:Proxy对象就是可以让你去对JavaScript中的一切合法对象的基本操作进行自定义.然后用你自定义的操作去覆盖其对象的基本操作.也就是当一个对象去执行一个基本操作时,其执行的过程和结果是你自定义的,而不是对象的.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="ES6" scheme="https://wangyiming.info/tags/ES6/"/>
+    
+      <category term="Proxy" scheme="https://wangyiming.info/tags/Proxy/"/>
+    
+      <category term="代理模式" scheme="https://wangyiming.info/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初始RxJS</title>
+    <link href="https://wangyiming.info/2017/08/05/%E5%88%9D%E5%A7%8BRxJS/"/>
+    <id>https://wangyiming.info/2017/08/05/初始RxJS/</id>
+    <published>2017-08-05T15:46:34.000Z</published>
+    <updated>2019-09-24T05:26:41.363Z</updated>
+    
+    <summary type="html">
+    
+      Rx.JS是英文 Reactive Extensions for JavaScript 的缩写.翻译成中文就是:JavaScript的响应式扩展.其主要的功能就是利用响应式编程的模式来实现JavaScript的异步式编程.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="RxJS" scheme="https://wangyiming.info/tags/RxJS/"/>
+    
+      <category term="观察者模式" scheme="https://wangyiming.info/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="迭代模式" scheme="https://wangyiming.info/tags/%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对Angular中的生命周期钩子的理解</title>
+    <link href="https://wangyiming.info/2017/07/06/%E5%AF%B9Angular%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://wangyiming.info/2017/07/06/对Angular中的生命周期钩子的理解/</id>
+    <published>2017-07-06T12:46:34.000Z</published>
+    <updated>2019-09-24T05:26:41.387Z</updated>
+    
+    <summary type="html">
+    
+      简单点来说生命周期钩子就是Angular中一个组件从被创建当销毁期间的一些有意义的关键时刻.这些关键时刻在Angular中被Angular核心模块`@angular/core`暴露出来,赋予了我们在它们发生时采取行动的能力.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Angular" scheme="https://wangyiming.info/tags/Angular/"/>
+    
+      <category term="前端框架" scheme="https://wangyiming.info/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端跨域之CORS</title>
+    <link href="https://wangyiming.info/2017/06/21/%E5%89%8D%E7%AB%AF%E8%B7%A8%E5%9F%9F%E4%B9%8BCORS/"/>
+    <id>https://wangyiming.info/2017/06/21/前端跨域之CORS/</id>
+    <published>2017-06-20T17:37:12.000Z</published>
+    <updated>2019-09-24T05:26:41.410Z</updated>
+    
+    <summary type="html">
+    
+      在前端开发中出于种种原因,总会有需要访问其它域名数据的时候.比如说,因为某项业务你需要调用一下第三方的一个接口.或者说你需要与其他域名的网站交互一下数据等等.不一而足.但是,与此同时我们也知道.浏览器在出于安全方面的考虑,有一个同源策略.只要是不同域名,不同端口,不同协议之间的通讯都会被浏览器阻止.而在这种情况下,跨域这个概念也就油然而生了.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="AJAX" scheme="https://wangyiming.info/tags/AJAX/"/>
+    
+      <category term="跨域" scheme="https://wangyiming.info/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对ES6Generator函数的理解</title>
+    <link href="https://wangyiming.info/2017/05/28/%E5%AF%B9ES6Generator%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://wangyiming.info/2017/05/28/对ES6Generator函数的理解/</id>
+    <published>2017-05-28T14:21:34.000Z</published>
+    <updated>2019-09-24T02:58:55.067Z</updated>
+    
+    <summary type="html">
+    
+      Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="ES6" scheme="https://wangyiming.info/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="异步编程" scheme="https://wangyiming.info/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node那些事之模块化</title>
+    <link href="https://wangyiming.info/2017/05/25/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>https://wangyiming.info/2017/05/25/Node那些事之模块化/</id>
+    <published>2017-05-25T06:27:24.000Z</published>
+    <updated>2019-09-24T05:26:41.384Z</updated>
+    
+    <summary type="html">
+    
+      把一些功能类似的代码,封装到一个单独的文件中去,这些单独抽离出来的代码,就能够提供各种各样好用的功能.这种通过代码功能分割文件的方式就叫做模块化开发.其好处是:保证了每个文件的功能(职能)单一.需要什么特定的功能,就直接调用某一个特定的模块.这样对将来程序开发和维护都有好处
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Node" scheme="https://wangyiming.info/tags/Node/"/>
+    
+      <category term="Node那些事系列" scheme="https://wangyiming.info/tags/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E7%B3%BB%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于JavaScript 基本型数据和引用型数据的区别。</title>
+    <link href="https://wangyiming.info/2017/04/22/%E5%85%B3%E4%BA%8EJavaScript%20%E5%9F%BA%E6%9C%AC%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%92%8C%E5%BC%95%E7%94%A8%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>https://wangyiming.info/2017/04/22/关于JavaScript 基本型数据和引用型数据的区别/</id>
+    <published>2017-04-22T09:26:34.000Z</published>
+    <updated>2019-09-24T05:26:41.397Z</updated>
+    
+    <summary type="html">
+    
+      关于JavaScript 基本型数据和引用型数据的区别。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="数据类型" scheme="https://wangyiming.info/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS 新特性之Native Variables、Feature Queries、Grid Layout</title>
+    <link href="https://wangyiming.info/2017/04/16/CSS%20%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8B%20Native%20Variables%E3%80%81%20Feature%20Queries%E3%80%81Grid%20Layout/"/>
+    <id>https://wangyiming.info/2017/04/16/CSS 新特性之 Native Variables、 Feature Queries、Grid Layout/</id>
+    <published>2017-04-16T04:46:14.000Z</published>
+    <updated>2019-09-24T05:22:39.530Z</updated>
+    
+    <summary type="html">
+    
+      前端的发展真的是日新月异,在2017年,虽然CSS4依然在草案当中尚未发布,但是,CSS依然新增了许多新的特性.其中,Native Variables(本地变量)、Feature Queries（特征查询）、Grid Layout（栅格布局）这三个特性是最然我感到激动,因为使用它们,可以很大程度上增强你的开发效率和用户体验.下面就让我来一一介绍他们吧.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSS" scheme="https://wangyiming.info/tags/CSS/"/>
+    
+      <category term="页面布局" scheme="https://wangyiming.info/tags/%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是Symbol()类型的数据?</title>
+    <link href="https://wangyiming.info/2017/04/15/%E5%AF%B9%E4%BA%8EES6%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8BSymbol()%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://wangyiming.info/2017/04/15/对于ES6新数据类型Symbol()的理解和学习/</id>
+    <published>2017-04-15T15:26:34.000Z</published>
+    <updated>2019-09-24T05:26:41.406Z</updated>
+    
+    <summary type="html">
+    
+      Symbol 是一种特殊的、不可变的数据类型,可以作为对象属性的标识符使用。Symbol 对象是一个 symbol primitive data type 的隐式对象包装器。symbol 数据类型是一个 primitive data type.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="ES6" scheme="https://wangyiming.info/tags/ES6/"/>
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="数据类型" scheme="https://wangyiming.info/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优化动画之requestAnimationFrame</title>
+    <link href="https://wangyiming.info/2017/04/04/%E4%BC%98%E5%8C%96JS%E5%8A%A8%E7%94%BB%E4%B9%8BrequestAnimationFrame/"/>
+    <id>https://wangyiming.info/2017/04/04/优化JS动画之requestAnimationFrame/</id>
+    <published>2017-04-04T14:46:14.000Z</published>
+    <updated>2019-09-24T05:26:41.395Z</updated>
+    
+    <summary type="html">
+    
+      window.requestAnimationFrame() 方法告诉浏览器您希望执行动画，并请求浏览器调用指定的函数在下一次重绘之前更新动画。该方法将在重绘之前调用的回调作为参数。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSS" scheme="https://wangyiming.info/tags/CSS/"/>
+    
+      <category term="页面动画" scheme="https://wangyiming.info/tags/%E9%A1%B5%E9%9D%A2%E5%8A%A8%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对JavaScript中闭包的理解</title>
+    <link href="https://wangyiming.info/2017/03/28/%E5%AF%B9JavaScript%E4%B8%AD%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://wangyiming.info/2017/03/28/对JavaScript中闭包的理解/</id>
+    <published>2017-03-28T05:26:34.000Z</published>
+    <updated>2019-09-24T05:26:41.350Z</updated>
+    
+    <summary type="html">
+    
+      在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="闭包" scheme="https://wangyiming.info/tags/%E9%97%AD%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node那些事之认识node</title>
+    <link href="https://wangyiming.info/2017/03/18/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E4%B9%8B%E8%AE%A4%E8%AF%86node/"/>
+    <id>https://wangyiming.info/2017/03/18/Node那些事之认识node/</id>
+    <published>2017-03-18T01:27:37.000Z</published>
+    <updated>2019-09-24T05:26:41.391Z</updated>
+    
+    <summary type="html">
+    
+      Node.JS是一个基于Chrome的V8引擎的JavaScript运行环境
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Node" scheme="https://wangyiming.info/tags/Node/"/>
+    
+      <category term="Node那些事系列" scheme="https://wangyiming.info/tags/Node%E9%82%A3%E4%BA%9B%E4%BA%8B%E7%B3%BB%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>理解什么是的面向对象设计</title>
+    <link href="https://wangyiming.info/2017/03/16/%E7%90%86%E8%A7%A3%E4%BB%80%E4%B9%88%E6%98%AF%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://wangyiming.info/2017/03/16/理解什么是的面向对象设计/</id>
+    <published>2017-03-16T11:26:34.000Z</published>
+    <updated>2019-09-24T05:26:41.400Z</updated>
+    
+    <summary type="html">
+    
+      面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的程序编程范型，同时也是一种程序开发的抽象方针。它可能包含数据、属性、代码与方法。对象则指的是类的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性，对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="https://wangyiming.info/tags/JavaScript/"/>
+    
+      <category term="面向对象" scheme="https://wangyiming.info/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+      <category term="程序设计" scheme="https://wangyiming.info/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在HTML5的时代,重新认识Cookie</title>
+    <link href="https://wangyiming.info/2017/01/16/%E5%9C%A8HTML5%E7%9A%84%E6%97%B6%E4%BB%A3,%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86Cookie/"/>
+    <id>https://wangyiming.info/2017/01/16/在HTML5的时代,重新认识Cookie/</id>
+    <published>2017-01-16T09:23:41.000Z</published>
+    <updated>2019-09-24T05:26:41.367Z</updated>
+    
+    <summary type="html">
+    
+      Cookie是什么?我想任何一个互联网的从业者都会很快的告诉你,它是一种浏览器本地存储的一种方式.可以将一部分资源存放在本地,已达到更好的网络体验.
+    
+    </summary>
+    
+    
+      <category term="原创" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="前端技术" scheme="https://wangyiming.info/categories/%E5%8E%9F%E5%88%9B/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HTML5" scheme="https://wangyiming.info/tags/HTML5/"/>
+    
+      <category term="Cookie" scheme="https://wangyiming.info/tags/Cookie/"/>
+    
+      <category term="本地储存" scheme="https://wangyiming.info/tags/%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98/"/>
+    
+  </entry>
+  
+</feed>
